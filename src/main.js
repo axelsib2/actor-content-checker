@@ -126,4 +126,12 @@ Apify.main(async () => {
         log.info(`- https://api.apify.com/v2/key-value-stores/${store.storeId}/records/previousScreenshot.png`);
         log.info(`- https://api.apify.com/v2/key-value-stores/${store.storeId}/records/previousData`);
     }
+    //save output 
+    const output={
+        change: previousData === content? false:true,
+        previousData: previousData,
+        currentData:content
+    }
+    await Apify.setValue('OUTPUT', output);
+    
 });
