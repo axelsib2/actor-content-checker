@@ -55,7 +55,9 @@ Apify.main(async () => {
     await page.waitForSelector(contentSelector,{
             timeout:navigationTimeout
         });
-    await sleep(5000);
+    await page.evaluate((contentSelector) => {
+        return document.querySelectorAll('"'+contentSelector'"').scrollIntoView();
+    }, contentSelector)
 
     // Store a screenshot
     log.info('Saving screenshot...');
