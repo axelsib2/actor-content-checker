@@ -62,7 +62,7 @@ Apify.main(async () => {
     log.info('Saving screenshot...');
     let screenshotBuffer = null;
     try {
-        let elem = await page.$(selector);
+        let elem = await page.$(contentSelector);
         screenshotBuffer = await elem.screenshot({encoding:'base64'});
     } catch (e) {
         throw new Error('Cannot get screenshot (screenshot selector is probably wrong)');
