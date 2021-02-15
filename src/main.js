@@ -43,7 +43,7 @@ Apify.main(async () => {
 
     log.info(`Opening URL: ${url}`);
     const page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setViewport({ width: 1440, height: 920 });
     await page.goto(url, {
         waitUntil: 'networkidle2',
         timeout: navigationTimeout,
@@ -51,19 +51,19 @@ Apify.main(async () => {
 
     // wait 5 seconds (if there is some dynamic content)
     // TODO: this should wait for the selector to be available
-    log.info('Sleeping 5s ...');
     await page.waitForSelector(contentSelector,{
             timeout:navigationTimeout
         });
     await page.evaluate((contentSelector) => {
         return document.querySelectorAll('"'+contentSelector'"').scrollIntoView();
     }, contentSelector)
-
+    
     // Store a screenshot
     log.info('Saving screenshot...');
     let screenshotBuffer = null;
     try {
-        screenshotBuffer = await screenshotDOMElement(page, screenshotSelector, 10);
+        let elem = await page.$(selector);
+        screenshotBuffer = await elem.screenshot({encoding:'base64'});
     } catch (e) {
         throw new Error('Cannot get screenshot (screenshot selector is probably wrong)');
     }
