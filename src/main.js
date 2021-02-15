@@ -52,6 +52,9 @@ Apify.main(async () => {
     // wait 5 seconds (if there is some dynamic content)
     // TODO: this should wait for the selector to be available
     log.info('Sleeping 5s ...');
+    await page.waitForSelector(contentSelector,{
+            timeout:navigationTimeout
+        });
     await sleep(5000);
 
     // Store a screenshot
