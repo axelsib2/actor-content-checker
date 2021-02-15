@@ -131,7 +131,7 @@ Apify.main(async () => {
         change: previousData === content? false:true,
         previousData: previousData,
         currentData:content,
-        newScreenshotUrl:"https://api.apify.com/v2/key-value-stores/${store.storeId}/records/currentScreenshot.png"
+        newScreenshotUrl:`https://api.apify.com/v2/key-value-stores/${store.storeId}/records/currentScreenshot.png`
     }
     await Apify.setValue('OUTPUT', output);
     
