@@ -49,8 +49,8 @@ Apify.main(async () => {
         timeout: navigationTimeout,
     });
 
-    // wait 5 seconds (if there is some dynamic content)
-    // TODO: this should wait for the selector to be available
+    // DEPRECATED wait 5 seconds (if there is some dynamic content)
+    // DONE: this should wait for the selector to be available
     await page.waitForSelector(contentSelector,{
             timeout:navigationTimeout
         });
@@ -63,7 +63,7 @@ Apify.main(async () => {
     let screenshotBuffer = null;
     try {
         let elem = await page.$(contentSelector);
-        screenshotBuffer = await elem.screenshot({encoding:'base64'});
+        screenshotBuffer = await elem.screenshot();
     } catch (e) {
         throw new Error('Cannot get screenshot (screenshot selector is probably wrong)');
     }
